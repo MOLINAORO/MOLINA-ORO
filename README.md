@@ -1,6 +1,4 @@
-## 📈 Mercado del Oro en Tiempo Real
-
-(XAU/EUR).
+## 📈 (XAU/EUR).
 
 ---
 
