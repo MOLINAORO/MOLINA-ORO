@@ -1,5 +1,4 @@
 # MOLINA-ORO
-# MOLINA-ORO
 
 ## 📊 Mercado del Oro en Tiempo Real
 
