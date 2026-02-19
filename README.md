@@ -1,11 +1,8 @@
-# MOLINA-ORO
+## 📈 Mercado del Oro en Tiempo Real
 
-## 📊 Mercado del Oro en Tiempo Real
-
-Gráficos actualizados del XAU/USD.
-Variaciones diarias.
-Seguimiento de tendencia.
+Seguimiento del precio del oro (XAU/USD).
+Actualización y análisis gráfico.
 
 ---
 
-MOLINA ORO | Activo Refugio.
+MOLINA ORO | Activo Refugio
