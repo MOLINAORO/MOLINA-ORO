@@ -3,69 +3,66 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MOLINA ORO | XAU/EUR</title>
+<title>MOLINA ORO | Activo Refugio</title>
 
 <style>
-body {
-    margin: 0;
-    background-color: #000000;
-    color: #ffffff;
-    font-family: Arial, Helvetica, sans-serif;
-    text-align: center;
+body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    background:#000;
+    color:#fff;
 }
 
-header {
-    padding: 40px 20px 20px 20px;
+header{
+    text-align:center;
+    padding:30px 20px;
+    border-bottom:1px solid #bfa046;
 }
 
-.logo {
-    width: 140px;
-    margin-bottom: 20px;
+header img{
+    width:80px;
+    margin-bottom:15px;
 }
 
-h1 {
-    font-size: 28px;
-    letter-spacing: 2px;
-    margin: 0;
+h1{
+    color:#d4af37;
+    font-size:26px;
+    margin:0;
 }
 
-.subtitulo {
-    color: #c9a227;
-    margin-top: 8px;
-    font-size: 14px;
-    letter-spacing: 1px;
+.section{
+    padding:30px 20px;
+    max-width:900px;
+    margin:auto;
 }
 
-.contenedor {
-    margin-top: 40px;
-    padding: 0 20px;
+.card{
+    background:#111;
+    border:1px solid #bfa046;
+    border-radius:10px;
+    padding:20px;
+    margin-bottom:25px;
 }
 
-.card {
-    background: #111111;
-    border: 1px solid #c9a227;
-    border-radius: 12px;
-    padding: 30px;
-    max-width: 400px;
-    margin: auto;
+.card h2{
+    color:#d4af37;
+    margin-top:0;
 }
 
-.precio {
-    font-size: 42px;
-    font-weight: bold;
-    margin: 10px 0;
+.price{
+    font-size:36px;
+    font-weight:bold;
 }
 
-.divisa {
-    color: #c9a227;
-    font-size: 16px;
-    letter-spacing: 2px;
-}
+.green{ color:#00c853; }
+.red{ color:#ff5252; }
 
-.footer {
-    margin-top: 60px;
-    font-size: 12px;
-    color: #777;
+footer{
+    text-align:center;
+    padding:30px;
+    font-size:14px;
+    color:#aaa;
+    border-top:1px solid #bfa046;
 }
 </style>
 </head>
@@ -73,22 +70,62 @@ h1 {
 <body>
 
 <header>
-    <img src="logo.png" alt="MOLINA ORO" class="logo">
-    <h1>MOLINA ORO</h1>
-    <div class="subtitulo">COTIZACIÓN ORO</div>
+    <img src="logo.png">
+    <h1>MOLINA ORO | Activo Refugio</h1>
 </header>
 
-<div class="contenedor">
-    <div class="card">
-        <div class="divisa">XAU / EUR</div>
-        <div class="precio">€ 0.00</div>
-        <div style="font-size:13px; color:#888;">Actualización manual</div>
-    </div>
+<div class="section">
+
+<div class="card">
+<h2>Precio Spot Oro (EUR)</h2>
+<div class="price">€ --</div>
+<p>Actualización en tiempo real</p>
 </div>
 
-<div class="footer">
-    © 2026 MOLINA ORO
+<div class="card">
+<h2>Gráfico Histórico</h2>
+
+<!-- TradingView Widget BEGIN -->
+<div class="tradingview-widget-container">
+  <div id="tradingview_xau"></div>
+  <script src="https://s3.tradingview.com/tv.js"></script>
+  <script>
+  new TradingView.widget({
+  "width": "100%",
+  "height": 500,
+  "symbol": "OANDA:XAUUSD",
+  "interval": "D",
+  "timezone": "Europe/Madrid",
+  "theme": "dark",
+  "style": "1",
+  "locale": "es",
+  "toolbar_bg": "#000000",
+  "enable_publishing": false,
+  "hide_top_toolbar": false,
+  "hide_legend": false,
+  "container_id": "tradingview_xau"
+});
+  </script>
 </div>
+<!-- TradingView Widget END -->
+
+</div>
+
+<div class="card">
+<h2>Gold / Silver Ratio</h2>
+<p>Próximamente en versión dinámica</p>
+</div>
+
+<div class="card">
+<h2>Market Cap del Oro</h2>
+<p>Actualización automática en futuras versiones</p>
+</div>
+
+</div>
+
+<footer>
+© 2026 MOLINA ORO — Activo Refugio
+</footer>
 
 </body>
 </html>
