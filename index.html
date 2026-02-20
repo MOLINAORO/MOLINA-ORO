@@ -5,92 +5,136 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MOLINA ORO | Activo Refugio</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+
 <style>
 body{
-    margin:0;
-    background:#000000;
-    color:#ffffff;
-    font-family: Arial, Helvetica, sans-serif;
-    text-align:center;
+margin:0;
+background:#000;
+color:#fff;
+font-family:'Montserrat',sans-serif;
+text-align:center;
 }
 
-.container{
-    width:90%;
-    max-width:900px;
-    margin:auto;
-    padding-top:40px;
+header{
+padding:60px 20px 30px 20px;
 }
 
-.logo{
-    width:120px;
-    margin-bottom:20px;
+header img{
+width:140px;
+margin-bottom:20px;
 }
 
 h1{
-    letter-spacing:4px;
-    font-size:28px;
-    margin:10px 0;
+font-weight:600;
+letter-spacing:4px;
+margin:0;
 }
 
-.subtitle{
-    color:#caa84a;
-    margin-bottom:40px;
-    font-size:14px;
-    letter-spacing:2px;
+.sub{
+color:#caa94d;
+margin-top:10px;
+letter-spacing:2px;
+font-size:14px;
+}
+
+.dashboard{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:30px;
+padding:40px 20px;
 }
 
 .card{
-    border:1px solid #caa84a;
-    border-radius:18px;
-    padding:30px;
-    margin-bottom:40px;
+background:#0a0a0a;
+border:1px solid #caa94d;
+border-radius:20px;
+padding:30px;
+width:300px;
+box-shadow:0 0 25px rgba(202,169,77,0.15);
 }
 
-.price-title{
-    color:#caa84a;
-    letter-spacing:3px;
-    font-size:14px;
+.card h3{
+color:#caa94d;
+letter-spacing:2px;
+font-weight:500;
 }
 
 .price{
-    font-size:42px;
-    margin:15px 0;
+font-size:40px;
+font-weight:700;
+margin-top:15px;
 }
 
-.footer{
-    margin-top:50px;
-    font-size:12px;
-    color:#888;
+.info{
+color:#aaa;
+margin-top:10px;
+font-size:13px;
+}
+
+.chart-section{
+margin-top:40px;
+padding:20px;
+}
+
+.news{
+margin-top:50px;
+padding:20px;
+}
+
+.news h2{
+color:#caa94d;
+letter-spacing:3px;
+}
+
+footer{
+margin-top:60px;
+padding:20px;
+color:#666;
+font-size:12px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
-
-<img src="logo.png" class="logo">
-
+<header>
+<img src="logo.png" alt="MOLINA ORO Logo">
 <h1>MOLINA ORO</h1>
-<div class="subtitle">ACTIVO REFUGIO</div>
+<div class="sub">ACTIVO REFUGIO</div>
+</header>
+
+<section class="dashboard">
 
 <div class="card">
-<div class="price-title">XAU / EUR</div>
-<div class="price">Precio en tiempo real</div>
+<h3>XAU / EUR</h3>
+<div class="price" id="goldPrice">€ Cargando...</div>
+<div class="info">Precio spot por onza</div>
 </div>
 
 <div class="card">
-<h2 style="color:#caa84a; font-weight:normal;">Gráfico Histórico</h2>
+<h3>MARKET CAP</h3>
+<div class="price">€ 20T+</div>
+<div class="info">Estimación global oro físico</div>
+</div>
 
-<!-- TradingView Widget BEGIN -->
+<div class="card">
+<h3>ACTUALIZACIÓN</h3>
+<div class="price" id="updateTime">--:--</div>
+<div class="info">Último refresh automático</div>
+</div>
+
+</section>
+
+<section class="chart-section">
 <div class="tradingview-widget-container">
-  <div id="tradingview_xaueur"></div>
+  <div id="tradingview_chart"></div>
   <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
   <script type="text/javascript">
-  new TradingView.widget(
-  {
-  "width": "100%",
-  "height": 500,
+  new TradingView.widget({
+  "container_id": "tradingview_chart",
+  "autosize": true,
   "symbol": "OANDA:XAUEUR",
   "interval": "D",
   "timezone": "Etc/UTC",
@@ -99,23 +143,50 @@ h1{
   "locale": "es",
   "toolbar_bg": "#000000",
   "enable_publishing": false,
-  "hide_top_toolbar": false,
-  "hide_legend": false,
-  "save_image": false,
-  "container_id": "tradingview_xaueur"
-}
-  );
+  "hide_side_toolbar": false
+});
   </script>
 </div>
-<!-- TradingView Widget END -->
+</section>
 
-</div>
+<section class="news">
+<h2>NOTICIAS DEL ORO</h2>
+<div id="newsContainer">Cargando noticias...</div>
+</section>
 
-<div class="footer">
-© 2026 MOLINA ORO | Activo Refugio
-</div>
+<footer>
+© 2026 MOLINA ORO – Activo Refugio
+</footer>
 
-</div>
+<script>
+async function fetchGoldPrice(){
+try{
+const response = await fetch("https://api.gold-api.com/price/XAU/EUR");
+const data = await response.json();
+document.getElementById("goldPrice").innerText = "€ " + data.price.toFixed(2);
+document.getElementById("updateTime").innerText = new Date().toLocaleTimeString();
+}catch(error){
+document.getElementById("goldPrice").innerText = "€ No disponible";
+}
+}
+fetchGoldPrice();
+setInterval(fetchGoldPrice, 60000);
+
+async function fetchNews(){
+try{
+const response = await fetch("https://api.rss2json.com/v1/api.json?rss_url=https://www.kitco.com/rss/news");
+const data = await response.json();
+let newsHTML = "";
+data.items.slice(0,3).forEach(item=>{
+newsHTML += `<p><a href="${item.link}" target="_blank" style="color:#caa94d;text-decoration:none;">${item.title}</a></p>`;
+});
+document.getElementById("newsContainer").innerHTML = newsHTML;
+}catch{
+document.getElementById("newsContainer").innerText = "No se pudieron cargar noticias.";
+}
+}
+fetchNews();
+</script>
 
 </body>
 </html>
