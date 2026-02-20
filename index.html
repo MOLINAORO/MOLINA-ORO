@@ -3,123 +3,40 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MOLINA ORO | GOLD TERMINAL</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+<title>MOLINA ORO | XAU/EUR</title>
 
 <style>
-body{
-margin:0;
-background:#000;
-color:#fff;
-font-family:'Montserrat',sans-serif;
+body {
+    margin: 0;
+    background-color: #000000;
+    color: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
 }
 
-header{
-padding:20px 40px;
-border-bottom:1px solid #222;
-display:flex;
-justify-content:space-between;
-align-items:center;
+header {
+    padding: 30px 20px;
 }
 
-header h1{
-color:#caa94d;
-letter-spacing:3px;
-font-size:18px;
+.logo {
+    width: 140px;
+    margin-bottom: 15px;
 }
 
-.terminal{
-padding:30px 40px;
+.pair {
+    font-size: 22px;
+    letter-spacing: 3px;
+    color: #d4af37;
 }
 
-.metrics{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-gap:20px;
-margin-bottom:40px;
+.tradingview-widget-container {
+    margin-top: 20px;
 }
 
-.metric{
-background:#0d0d0d;
-padding:20px;
-border:1px solid #222;
-border-radius:10px;
-}
-
-.metric-title{
-font-size:12px;
-color:#888;
-margin-bottom:10px;
-}
-
-.metric-value{
-font-size:24px;
-font-weight:600;
-}
-
-.green{color:#00c853;}
-.red{color:#ff3d00;}
-
-.performance{
-margin-bottom:40px;
-}
-
-.performance table{
-width:100%;
-border-collapse:collapse;
-}
-
-.performance th, .performance td{
-border:1px solid #222;
-padding:12px;
-text-align:center;
-}
-
-.performance th{
-color:#caa94d;
-font-weight:600;
-}
-
-.chart{
-margin-bottom:50px;
-}
-
-.calculator{
-background:#0d0d0d;
-padding:20px;
-border-radius:10px;
-max-width:400px;
-}
-
-input{
-padding:8px;
-width:100%;
-margin-top:10px;
-background:#111;
-border:1px solid #333;
-color:#fff;
-border-radius:5px;
-}
-
-button{
-margin-top:10px;
-padding:10px;
-width:100%;
-background:#caa94d;
-border:none;
-color:#000;
-font-weight:600;
-cursor:pointer;
-border-radius:5px;
-}
-
-footer{
-margin-top:60px;
-padding:20px;
-text-align:center;
-color:#555;
-font-size:12px;
+.footer {
+    margin-top: 20px;
+    font-size: 12px;
+    color: #666;
 }
 </style>
 </head>
@@ -127,142 +44,38 @@ font-size:12px;
 <body>
 
 <header>
-<h1>MOLINA ORO | GOLD TERMINAL</h1>
-<div>XAU / EUR</div>
+    <img src="logo.png" alt="MOLINA ORO" class="logo">
+    <div class="pair">XAU / EUR</div>
 </header>
 
-<div class="terminal">
-
-<div class="metrics">
-<div class="metric">
-<div class="metric-title">Precio Spot</div>
-<div class="metric-value" id="price">€ --</div>
-</div>
-
-<div class="metric">
-<div class="metric-title">Variación 1D</div>
-<div class="metric-value" id="change">--%</div>
-</div>
-
-<div class="metric">
-<div class="metric-title">High</div>
-<div class="metric-value" id="high">--</div>
-</div>
-
-<div class="metric">
-<div class="metric-title">Low</div>
-<div class="metric-value" id="low">--</div>
-</div>
-
-<div class="metric">
-<div class="metric-title">Market Cap</div>
-<div class="metric-value" id="cap">€ --</div>
-</div>
-</div>
-
-<div class="performance">
-<table>
-<tr>
-<th>Periodo</th>
-<th>Rendimiento</th>
-</tr>
-<tr>
-<td>1D</td>
-<td id="perf1d">--%</td>
-</tr>
-<tr>
-<td>7D</td>
-<td>--%</td>
-</tr>
-<tr>
-<td>1M</td>
-<td>--%</td>
-</tr>
-<tr>
-<td>YTD</td>
-<td>--%</td>
-</tr>
-</table>
-</div>
-
-<div class="chart">
-<div id="tradingview_chart"></div>
-<script src="https://s3.tradingview.com/tv.js"></script>
-<script>
-new TradingView.widget({
-"container_id": "tradingview_chart",
-"width": "100%",
-"height": 500,
-"symbol": "OANDA:XAUEUR",
-"interval": "D",
-"theme": "dark",
-"style": "1",
-"locale": "es",
-"toolbar_bg": "#000",
-"allow_symbol_change": false
+<!-- TradingView Widget BEGIN -->
+<div class="tradingview-widget-container">
+  <div id="tradingview_chart"></div>
+  <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+  <script type="text/javascript">
+  new TradingView.widget({
+  "width": "100%",
+  "height": 600,
+  "symbol": "OANDA:XAU_EUR",
+  "interval": "D",
+  "timezone": "Europe/Madrid",
+  "theme": "dark",
+  "style": "1",
+  "locale": "es",
+  "toolbar_bg": "#000000",
+  "enable_publishing": false,
+  "hide_top_toolbar": false,
+  "hide_legend": false,
+  "save_image": false,
+  "container_id": "tradingview_chart"
 });
-</script>
+  </script>
 </div>
+<!-- TradingView Widget END -->
 
-<div class="calculator">
-<div>Calculadora de Inversión</div>
-<input type="number" id="invest" placeholder="€ Invertir">
-<button onclick="calc()">Calcular</button>
-<div id="result"></div>
+<div class="footer">
+MOLINA ORO
 </div>
-
-</div>
-
-<footer>
-© 2026 MOLINA ORO – Gold Terminal
-</footer>
-
-<script>
-let currentPrice = 0;
-
-async function loadData(){
-try{
-const res = await fetch("https://api.gold-api.com/price/XAU/EUR");
-const data = await res.json();
-
-currentPrice = data.price;
-
-document.getElementById("price").innerText = "€ " + data.price.toFixed(2);
-
-let change = ((data.price - data.prev_close_price)/data.prev_close_price)*100;
-let cls = change >=0 ? "green":"red";
-
-document.getElementById("change").innerHTML =
-`<span class="${cls}">${change.toFixed(2)}%</span>`;
-
-document.getElementById("perf1d").innerHTML =
-`<span class="${cls}">${change.toFixed(2)}%</span>`;
-
-document.getElementById("high").innerText = "€ " + data.high_price.toFixed(2);
-document.getElementById("low").innerText = "€ " + data.low_price.toFixed(2);
-
-let toneladas = 212582;
-let cap = toneladas * 32150.7 * currentPrice;
-document.getElementById("cap").innerText =
-"€ " + (cap/1000000000000).toFixed(2) + " T";
-
-}catch{
-document.getElementById("price").innerText = "No disponible";
-}
-}
-
-function calc(){
-let inv = document.getElementById("invest").value;
-if(inv && currentPrice){
-let oz = inv / currentPrice;
-document.getElementById("result").innerHTML =
-`Obtendrías <b>${oz.toFixed(4)}</b> oz`;
-}
-}
-
-loadData();
-setInterval(loadData,60000);
-</script>
 
 </body>
 </html>
