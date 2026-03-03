@@ -5,71 +5,62 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MOLINA ORO | Activo Refugio</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-
 <style>
 body{
     margin:0;
     background:#000000;
     color:#ffffff;
-    font-family:'Montserrat', sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align:center;
 }
 
 .container{
     width:90%;
-    max-width:1200px;
+    max-width:900px;
     margin:auto;
-    padding:60px 0;
-    text-align:center;
+    padding-top:40px;
 }
 
 .logo{
-    width:130px;
+    width:120px;
     margin-bottom:20px;
 }
 
 h1{
-    letter-spacing:6px;
+    letter-spacing:4px;
     font-size:28px;
-    font-weight:600;
-    margin:0;
+    margin:10px 0;
 }
 
 .subtitle{
     color:#caa84a;
-    margin-top:10px;
-    margin-bottom:50px;
-    font-size:13px;
-    letter-spacing:3px;
+    margin-bottom:40px;
+    font-size:14px;
+    letter-spacing:2px;
 }
 
 .card{
     border:1px solid #caa84a;
-    border-radius:20px;
-    padding:40px 20px;
-    margin-bottom:50px;
-    background:linear-gradient(145deg,#0a0a0a,#111111);
-    box-shadow:0 0 30px rgba(202,168,74,0.15);
+    border-radius:18px;
+    padding:30px;
+    margin-bottom:40px;
 }
 
-.section-title{
+.price-title{
     color:#caa84a;
     letter-spacing:3px;
-    margin-bottom:30px;
-    font-weight:400;
+    font-size:14px;
+}
+
+.price{
+    font-size:42px;
+    margin:15px 0;
 }
 
 .footer{
-    margin-top:60px;
+    margin-top:50px;
     font-size:12px;
-    color:#777;
-    letter-spacing:1px;
-}
-
-@media(max-width:768px){
-    h1{
-        font-size:22px;
-    }
+    color:#888;
 }
 </style>
 </head>
@@ -78,61 +69,50 @@ h1{
 
 <div class="container">
 
-<!-- LOGO -->
-<img src="logo.png" class="logo" alt="Logo MOLINA ORO">
+<img src="logo.png" class="logo">
 
 <h1>MOLINA ORO</h1>
 <div class="subtitle">ACTIVO REFUGIO</div>
 
-<!-- PRECIO EN VIVO XAU/EUR -->
+<div class="card">
+<div class="price-title">XAU / EUR</div>
+<div class="price">ORO PRECIO SPOT EN VIVO</div>
+</div>
 
 <div class="card">
-<h2 class="section-title">PRECIO ORO EN VIVO (XAU/EUR)</h2>
+<h2 style="color:#caa84a; font-weight:normal;">Gráfico Histórico</h2>
 
+<!-- TradingView Widget BEGIN -->
 <div class="tradingview-widget-container">
-  <div class="tradingview-widget-container__widget"></div>
-  <script src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js" async>
+  <div id="tradingview_xaueur"></div>
+  <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+  <script type="text/javascript">
+  new TradingView.widget(
   {
-  "symbol": "OANDA:XAUEUR",
   "width": "100%",
-  "colorTheme": "dark",
-  "isTransparent": true,
-  "locale": "es"
+  "height": 500,
+  "symbol": "OANDA:XAUEUR",
+  "interval": "D",
+  "timezone": "Etc/UTC",
+  "theme": "dark",
+  "style": "1",
+  "locale": "es",
+  "toolbar_bg": "#000000",
+  "enable_publishing": false,
+  "hide_top_toolbar": false,
+  "hide_legend": false,
+  "save_image": false,
+  "container_id": "tradingview_xaueur"
 }
+  );
   </script>
 </div>
-
-</div>
-
-<!-- GRÁFICO PROFESIONAL -->
-
-<div class="card">
-<h2 class="section-title">GRÁFICO HISTÓRICO XAU/EUR</h2>
-
-<div id="tradingview_chart"></div>
-
-<script src="https://s3.tradingview.com/tv.js"></script>
-<script>
-new TradingView.widget({
-    "width": "100%",
-    "height": 600,
-    "symbol": "OANDA:XAUEUR",
-    "interval": "D",
-    "timezone": "Etc/UTC",
-    "theme": "dark",
-    "style": "1",
-    "locale": "es",
-    "toolbar_bg": "#000000",
-    "enable_publishing": false,
-    "allow_symbol_change": false,
-    "container_id": "tradingview_chart"
-});
-</script>
+<!-- TradingView Widget END -->
 
 </div>
 
 <div class="footer">
-© 2026 MOLINA ORO | Activo Refugio
+©️ 2026 MOLINA ORO | Activo Refugio
 </div>
 
 </div>
