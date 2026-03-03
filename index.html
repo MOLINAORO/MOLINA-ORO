@@ -66,6 +66,12 @@ h1{
     letter-spacing:1px;
 }
 
+.white-chart{
+    background:#ffffff;
+    border-radius:15px;
+    padding:10px;
+}
+
 @media(max-width:768px){
     h1{
         font-size:22px;
@@ -104,12 +110,14 @@ h1{
 
 </div>
 
-<!-- GRÁFICO PROFESIONAL -->
+<!-- GRÁFICO PROFESIONAL EN BLANCO -->
 
 <div class="card">
 <h2 class="section-title">GRÁFICO HISTÓRICO XAU/EUR</h2>
 
+<div class="white-chart">
 <div id="tradingview_chart"></div>
+</div>
 
 <script src="https://s3.tradingview.com/tv.js"></script>
 <script>
@@ -119,10 +127,10 @@ new TradingView.widget({
     "symbol": "OANDA:XAUEUR",
     "interval": "D",
     "timezone": "Etc/UTC",
-    "theme": "dark",
+    "theme": "light",
     "style": "1",
     "locale": "es",
-    "toolbar_bg": "#000000",
+    "toolbar_bg": "#ffffff",
     "enable_publishing": false,
     "allow_symbol_change": false,
     "container_id": "tradingview_chart"
