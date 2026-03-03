@@ -5,62 +5,94 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MOLINA ORO | Activo Refugio</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+
 <style>
 body{
     margin:0;
-    background:#000000;
-    color:#ffffff;
-    font-family: Arial, Helvetica, sans-serif;
-    text-align:center;
+    background:#000;
+    color:#fff;
+    font-family:'Montserrat', sans-serif;
 }
 
 .container{
     width:90%;
-    max-width:900px;
+    max-width:1100px;
     margin:auto;
-    padding-top:40px;
+    padding:60px 0;
+    text-align:center;
 }
 
 .logo{
     width:120px;
-    margin-bottom:20px;
+    margin-bottom:25px;
 }
 
 h1{
-    letter-spacing:4px;
-    font-size:28px;
-    margin:10px 0;
+    letter-spacing:6px;
+    font-size:30px;
+    font-weight:600;
+    margin:0;
 }
 
 .subtitle{
     color:#caa84a;
-    margin-bottom:40px;
-    font-size:14px;
-    letter-spacing:2px;
+    margin-top:10px;
+    margin-bottom:50px;
+    font-size:13px;
+    letter-spacing:3px;
 }
 
 .card{
     border:1px solid #caa84a;
-    border-radius:18px;
-    padding:30px;
-    margin-bottom:40px;
+    border-radius:20px;
+    padding:40px 30px;
+    margin-bottom:50px;
+    background:linear-gradient(145deg,#0a0a0a,#111);
+    box-shadow:0 0 25px rgba(202,168,74,0.15);
 }
 
-.price-title{
+.section-title{
     color:#caa84a;
     letter-spacing:3px;
-    font-size:14px;
+    margin-bottom:25px;
 }
 
 .price{
-    font-size:42px;
+    font-size:40px;
     margin:15px 0;
 }
 
+input{
+    padding:10px;
+    border:none;
+    border-radius:8px;
+    width:150px;
+    text-align:center;
+    font-size:16px;
+}
+
+button{
+    padding:10px 20px;
+    border:none;
+    border-radius:8px;
+    background:#caa84a;
+    color:#000;
+    font-weight:600;
+    cursor:pointer;
+    margin-left:10px;
+}
+
 .footer{
-    margin-top:50px;
+    margin-top:60px;
     font-size:12px;
-    color:#888;
+    color:#777;
+}
+
+@media(max-width:768px){
+    .price{
+        font-size:30px;
+    }
 }
 </style>
 </head>
@@ -69,47 +101,77 @@ h1{
 
 <div class="container">
 
-<img src="logo.png" class="logo">
-
 <h1>MOLINA ORO</h1>
 <div class="subtitle">ACTIVO REFUGIO</div>
 
-<div class="card">
-<div class="price-title">XAU / EUR</div>
-<div class="price">Precio en tiempo real</div>
-</div>
+<!-- PRECIO EN VIVO -->
 
 <div class="card">
-<h2 style="color:#caa84a; font-weight:normal;">Gráfico Histórico</h2>
+<h2 class="section-title">PRECIO ORO EN VIVO</h2>
 
-<!-- TradingView Widget BEGIN -->
 <div class="tradingview-widget-container">
-  <div id="tradingview_xaueur"></div>
-  <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-  <script type="text/javascript">
-  new TradingView.widget(
-  {
-  "width": "100%",
-  "height": 500,
-  "symbol": "OANDA:XAUEUR",
-  "interval": "D",
-  "timezone": "Etc/UTC",
-  "theme": "dark",
-  "style": "1",
-  "locale": "es",
-  "toolbar_bg": "#000000",
-  "enable_publishing": false,
-  "hide_top_toolbar": false,
-  "hide_legend": false,
-  "save_image": false,
-  "container_id": "tradingview_xaueur"
-}
-  );
+  <div id="tradingview_xauusd"></div>
+  <script src="https://s3.tradingview.com/tv.js"></script>
+  <script>
+  new TradingView.widget({
+      "width": "100%",
+      "height": 400,
+      "symbol": "OANDA:XAUUSD",
+      "interval": "D",
+      "theme": "dark",
+      "style": "1",
+      "locale": "es",
+      "toolbar_bg": "#000000",
+      "hide_top_toolbar": false,
+      "container_id": "tradingview_xauusd"
+  });
   </script>
 </div>
-<!-- TradingView Widget END -->
+</div>
 
+<!-- CALCULADORA 18K -->
+
+<div class="card">
+<h2 class="section-title">CALCULADORA ORO 18K</h2>
+
+<input type="number" id="gramos" placeholder="Gramos">
+<button onclick="calcular()">Calcular</button>
+
+<div class="price" id="resultado"></div>
 </div>
 
 <div class="footer">
-©️ 2026 MOLINA ORO | Activo 
+© 2026 MOLINA ORO | Activo Refugio
+</div>
+
+</div>
+
+<script>
+async function calcular(){
+
+    const gramos = document.getElementById("gramos").value;
+
+    if(!gramos) return;
+
+    // Precio XAUUSD desde API pública
+    const goldResponse = await fetch("https://api.metals.live/v1/spot/gold");
+    const goldData = await goldResponse.json();
+    const precioOnzaUSD = goldData.price;
+
+    // Tipo de cambio USD a ARS
+    const fxResponse = await fetch("https://api.exchangerate.host/latest?base=USD&symbols=ARS");
+    const fxData = await fxResponse.json();
+    const usdArs = fxData.rates.ARS;
+
+    const precioGramoUSD = precioOnzaUSD / 31.1035;
+    const precio18K = precioGramoUSD * 0.75;
+
+    const totalARS = precio18K * gramos * usdArs;
+
+    document.getElementById("resultado").innerHTML =
+    "$ " + totalARS.toFixed(2) + " ARS";
+}
+</script>
+
+</body>
+</html>
