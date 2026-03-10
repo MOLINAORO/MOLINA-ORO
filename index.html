@@ -5,72 +5,117 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MOLINA ORO | Activo Refugio</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-
 <style>
+
 body{
-    margin:0;
-    background:#000000;
-    color:#ffffff;
-    font-family:'Montserrat', sans-serif;
+margin:0;
+background:#000000;
+color:#ffffff;
+font-family: Arial, Helvetica, sans-serif;
+text-align:center;
 }
 
 .container{
-    width:90%;
-    max-width:1200px;
-    margin:auto;
-    padding:60px 0;
-    text-align:center;
+width:90%;
+max-width:900px;
+margin:auto;
+padding-top:40px;
 }
 
 .logo{
-    width:130px;
-    margin-bottom:20px;
+width:120px;
+margin-bottom:20px;
 }
 
 h1{
-    letter-spacing:6px;
-    font-size:28px;
-    font-weight:600;
-    margin:0;
+letter-spacing:4px;
+font-size:28px;
+margin:10px 0;
 }
 
 .subtitle{
-    color:#caa84a;
-    margin-top:10px;
-    margin-bottom:50px;
-    font-size:13px;
-    letter-spacing:3px;
+color:#caa84a;
+margin-bottom:40px;
+font-size:14px;
+letter-spacing:2px;
 }
 
 .card{
-    border:1px solid #caa84a;
-    border-radius:20px;
-    padding:40px 20px;
-    margin-bottom:50px;
-    background:linear-gradient(145deg,#0a0a0a,#111111);
-    box-shadow:0 0 30px rgba(202,168,74,0.15);
+border:1px solid #caa84a;
+border-radius:18px;
+padding:30px;
+margin-bottom:40px;
 }
 
-.section-title{
-    color:#caa84a;
-    letter-spacing:3px;
-    margin-bottom:30px;
-    font-weight:400;
+.price-title{
+color:#caa84a;
+letter-spacing:3px;
+font-size:14px;
+}
+
+.price{
+font-size:42px;
+margin:15px 0;
+}
+
+.button{
+display:inline-block;
+margin-top:15px;
+padding:12px 22px;
+border:1px solid #caa84a;
+border-radius:12px;
+color:#caa84a;
+text-decoration:none;
+letter-spacing:2px;
+}
+
+.button:hover{
+background:#caa84a;
+color:#000;
+}
+
+.contact{
+font-size:14px;
+line-height:1.8;
 }
 
 .footer{
-    margin-top:60px;
-    font-size:12px;
-    color:#777;
-    letter-spacing:1px;
+margin-top:50px;
+font-size:12px;
+color:#888;
 }
 
-@media(max-width:768px){
-    h1{
-        font-size:22px;
-    }
+.menu{
+margin-bottom:30px;
+font-size:14px;
 }
+
+.menu a{
+color:#caa84a;
+margin:0 15px;
+text-decoration:none;
+letter-spacing:1px;
+}
+
+.menu a:hover{
+text-decoration:underline;
+}
+
+/* botón whatsapp flotante */
+
+.whatsapp{
+position:fixed;
+bottom:25px;
+right:25px;
+background:#caa84a;
+color:#000;
+padding:14px 18px;
+border-radius:30px;
+font-weight:bold;
+text-decoration:none;
+font-size:14px;
+}
+
 </style>
 </head>
 
@@ -78,64 +123,122 @@ h1{
 
 <div class="container">
 
-<!-- LOGO -->
-<img src="logo.png" class="logo" alt="Logo MOLINA ORO">
+<img src="logo.png" class="logo">
 
 <h1>MOLINA ORO</h1>
 <div class="subtitle">ACTIVO REFUGIO</div>
 
-<!-- PRECIO EN VIVO XAU/EUR -->
+
+<div class="menu">
+<a href="#">Inicio</a>
+<a href="#grafico">Cotización</a>
+<a href="#comprar">Comprar Oro</a>
+<a href="#contacto">Contacto</a>
+</div>
+
 
 <div class="card">
-<h2 class="section-title">PRECIO ORO EN VIVO (XAU/EUR)</h2>
+
+<div class="price-title">XAU / EUR</div>
+<div class="price">Precio en tiempo real</div>
+
+</div>
+
+
+<div class="card" id="grafico">
+
+<h2 style="color:#caa84a; font-weight:normal;">Gráfico Histórico</h2>
 
 <div class="tradingview-widget-container">
-  <div class="tradingview-widget-container__widget"></div>
-  <script src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js" async>
-  {
-  "symbol": "OANDA:XAUEUR",
-  "width": "100%",
-  "colorTheme": "dark",
-  "isTransparent": true,
-  "locale": "es"
-}
-  </script>
-</div>
-
-</div>
-
-<!-- GRÁFICO PROFESIONAL -->
-
-<div class="card">
-<h2 class="section-title">GRÁFICO HISTÓRICO XAU/EUR</h2>
-
-<div id="tradingview_chart"></div>
+<div id="tradingview_xaueur"></div>
 
 <script src="https://s3.tradingview.com/tv.js"></script>
+
 <script>
+
 new TradingView.widget({
-    "width": "100%",
-    "height": 600,
-    "symbol": "OANDA:XAUEUR",
-    "interval": "D",
-    "timezone": "Etc/UTC",
-    "theme": "dark",
-    "style": "1",
-    "locale": "es",
-    "toolbar_bg": "#000000",
-    "enable_publishing": false,
-    "allow_symbol_change": false,
-    "container_id": "tradingview_chart"
+
+width:"100%",
+height:500,
+symbol:"OANDA:XAUEUR",
+interval:"D",
+timezone:"Etc/UTC",
+theme:"dark",
+style:"1",
+locale:"es",
+toolbar_bg:"#000000",
+enable_publishing:false,
+container_id:"tradingview_xaueur"
+
 });
+
 </script>
 
 </div>
 
-<div class="footer">
-© 2026 MOLINA ORO | Activo Refugio
+</div>
+
+
+<div class="card" id="comprar">
+
+<h2 style="color:#caa84a; font-weight:normal;">Comprar Oro</h2>
+
+<p>
+Oro 18 Quilates | Activo Refugio.  
+
+</p>
+
+<a class="button" href="https://wa.me/5492215664977">
+Consultar por WhatsApp
+</a>
+
+</div>
+
+
+<div class="card" id="contacto">
+
+<h2 style="color:#caa84a; font-weight:normal;">Contacto</h2>
+
+<div class="contact">
+
+📱 WhatsApp  
+<br>
+<a style="color:#caa84a;" href="https://wa.me/5492215664977">
++54 9 221 566-4977
+</a>
+
+<br><br>
+
+✉️ Email  
+<br>
+<a style="color:#caa84a;" href="mailto:molinaorokt@gmail.com">
+molinaorokt@gmail.com
+</a>
+
+<br><br>
+
+📷 Instagram  
+<br>
+<a style="color:#caa84a;" href="https://instagram.com/molina_oro">
+@molina_oro
+</a>
+
 </div>
 
 </div>
+
+
+<div class="footer">
+MOLINA ORO — Activo Refugio
+</div>
+
+</div>
+
+
+<a class="whatsapp" href="https://wa.me/5492215664977">
+WhatsApp
+</a>
+
 
 </body>
 </html>
